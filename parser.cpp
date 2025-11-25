@@ -88,19 +88,18 @@ token_type next_token()
 
 boolean match(tokentype expected)
 {
-  if (next_token() != expected)        // mismatch has occurred
+  if (next_token() != expected)        // mismatch 
   
   {
     syntaxerror1(saved_lexeme, expected);
-    return false;                      // won't reach here (exit in syntaxerror1)
+    return false; 
   }
 
-  else 
-                                  // match occurred
+  else //matched
   {
    
    cout << "Matched " << tokenName[expected] << endl;
-    token_available = false;           // eat the token so scanner is called again next time
+    token_available = false;           // eat token 
     return true;
 
   }
@@ -158,6 +157,7 @@ void s()
 {
   cout << "Processing <s>" << endl;
 
+  //check for optional connectr
   if (next_token() == CONNECTOR)
       match(CONNECTOR);
 
@@ -204,6 +204,7 @@ void afterNoun()
 
   tokentype t = next_token();
 
+  //check what comes after noun
   if (t == IS || t == WAS)
   {
     be();
@@ -223,7 +224,7 @@ void afterNoun()
   }
   else
   {
-    syntaxerror2(saved_lexeme, "afterNoun");
+    syntaxerror2(saved_lexeme, "afterNoun"); // no braces for single statements
   }
 }
 
@@ -276,7 +277,7 @@ void noun()
   else if (t == PRONOUN)
       match(PRONOUN);
   else
-      syntaxerror2(saved_lexeme, "noun");
+      syntaxerror2(saved_lexeme, "noun"); // error if not noun
 }
 
 // Grammar: <verb> ::= WORD2
@@ -353,7 +354,7 @@ extern ifstream fin;
 // Done by:  Eric
 int main()
 {
-    
+  cout << "GROUP 3 - Daniel Esparza, Eric Arias-Lopez, Kaden Campbell" << endl;  
   cout << "Enter the input file name: ";
   cin >> filename;
   fin.open(filename.c_str());
