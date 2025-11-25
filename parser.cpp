@@ -159,12 +159,17 @@ void s()
 
   //check for optional connectr
   if (next_token() == CONNECTOR)
-      match(CONNECTOR);
+  match(CONNECTOR);
 
   noun();
   match(SUBJECT);
   afterSubject();
+   
 }
+
+
+
+
 
 // Grammar: <afterSubject> ::= <verb> <tense> PERIOD | <noun> <afterNoun>
 // Done by: Kaden
@@ -181,6 +186,8 @@ void afterSubject()
     tense();
     match(PERIOD);
   }
+
+     
   // FIRST(<noun>) = WORD1 or PRONOUN
   else if (t == WORD1 || t == PRONOUN)
   {
@@ -193,6 +200,12 @@ void afterSubject()
     syntaxerror2(saved_lexeme, "afterSubject");
   }
 }
+
+
+
+
+
+
 
 // Grammar: <afterNoun> ::= <be> PERIOD
 //                        | DESTINATION <verb> <tense> PERIOD
@@ -207,9 +220,13 @@ void afterNoun()
   //check what comes after noun
   if (t == IS || t == WAS)
   {
+     
     be();
     match(PERIOD);
+     
   }
+
+     
   else if (t == DESTINATION)
   {
     match(DESTINATION);
@@ -217,11 +234,13 @@ void afterNoun()
     tense();
     match(PERIOD);
   }
+     
   else if (t == OBJECT)
   {
     match(OBJECT);
     afterObject();
   }
+     
   else
   {
     syntaxerror2(saved_lexeme, "afterNoun"); // no braces for single statements
@@ -275,10 +294,14 @@ void noun()
   if (t == WORD1)
       match(WORD1);
   else if (t == PRONOUN)
-      match(PRONOUN);
+   match(PRONOUN);
+     
   else
       syntaxerror2(saved_lexeme, "noun"); // error if not noun
 }
+
+
+
 
 // Grammar: <verb> ::= WORD2
 // Done by: Eric
@@ -297,6 +320,8 @@ void verb()
     
 }
 
+
+
 // Grammar: <be> ::= IS | WAS
 // Done by: Kaden
 void be()
@@ -307,6 +332,7 @@ void be()
 
   if (t == IS)
     match(IS);
+     
   else if (t == WAS)
     match(WAS);
   else
@@ -374,4 +400,5 @@ fin.close();
 //** require no other input files!
 //** syntax error EC requires producing errors.txt of error messages
 //** tracing On/Off EC requires sending a flag to trace message output functions
+
 
